@@ -25,20 +25,21 @@ We're going to work with some pre-existing template code, that's already stored 
 
 Once you're signed in, [go to our template repository](https://github.com/Southampton-RSG-Training/dirac-version-control-template) and select **Use this template**:
 
-
-![Use Template](fig/01-setup/template-copy.png)
+![Use Template]({{ site.url }}{{ site.baseurl }}/fig/02-using-repository/template-copy.png)
 
 We should get prompted to give details for what we'd like our copy of the template to be called. As this demo code is for analysing climate data, we'll name our copy of it `climate-analysis`. We also want it to be public, so anyone can see and copy our code:
 
-![Repository Details](fig/01-setup/template-details.png)
+![Repository Details]({{ site.url }}{{ site.baseurl }}/fig/02-using-repository/template-details.png)
 
 > ## Public or Private?
 > GitHub will allow you to create private repositories, so only people you specify can access the code, but it's always best to keep your code public - especially if you're going to use it in a paper! Code that generates or analyses data is a fundamental part of your method, and if you don't include your full method in papers your work can't be reproduced, and reproducibility is key to the scientific process. **Always** keep your repositories public unless you've got a strong reason, like embargoes imposed by industrial partners.
+>
+> A major advantage of this is if you leave academia, or you switch institution and forget to update the email on your GitHub account before you lose your old one, your work won't be lost forever!
 {: .callout}
 
 After a brief wait, GitHub will have created a **remote repository** - a copy of the files and their history stored on GitHub's servers. We want to copy that to our local machine, which we do using `git clone`. Click on the **code** button, and you should have a choice of ways to copy the code. Select **SSH**, then click the copy button to copy the repository's URL:
 
-![Copy Repository URL](fig/01-setup/repository-url.png)
+![Copy Repository URL]({{ site.url }}{{ site.baseurl }}/fig/02-using-repository/repository-url.png)
 
 ~~~
 $ git clone git@github.com:smangham/climate-analysis.git

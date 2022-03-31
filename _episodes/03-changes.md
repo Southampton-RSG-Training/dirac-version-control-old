@@ -99,9 +99,7 @@ Git will launch `nano` (or whatever other editor we configured at the start)
 so that we can write a longer message.
 
 **Good commit messages** start with a brief (<50 characters) summary of
-changes made in the commit.
-
-**NOT "Bug Fixes"** or **"Changes"**!
+changes made in the commit, **NOT "Bug Fixes"** or **"Changes"**!
 
 If you want to go into more detail, add
 a blank line between the summary line and your additional notes.
@@ -119,7 +117,6 @@ and stores a copy permanently inside the special `.git` directory.
 This permanent copy is called a **[revision](reference.html#revision)**
 and its short **identifier** is `a10bd8f`.
 (Your revision will have different identifier.)
-
 
 If we run `git status` now:
 
@@ -139,7 +136,7 @@ nothing to commit, working tree clean
 
 it tells us our local repository is up-to-date, although now we have edits to it that the remote version of it doesn't (we'll get to that later!).
 
-![Add and Commit](fig/04-changes/add.svg){:width="60%"}
+![Add and Commit]({{ site.url }}{{ site.baseurl }}/fig/03-changes/add.svg){:width="60%"}
 
 Git has a special **staging** area
 where it keeps track of things that have been **added** to
@@ -192,7 +189,7 @@ The listing for each revision includes
 * the **log message** Git was given when the revision was committed.
 
 ### Modify a file (1)
-Now suppose we add more information, a **Docstring**, to the **top** of one of the files:
+Now suppose we modify an existing file, for example by adding a **Docstring** to the **top** of one of the files:
 
 ~~~
 $ nano climate_analysis.py
@@ -322,7 +319,7 @@ before actually committing anything
 because we may not want to commit **everything at once**.
 
 For example,
-suppose we might have **fixed a bug** in some existing code, but we might have added new code that's **not ready to share**
+suppose we might have **fixed a bug** in some existing code, but we might have added new code that's **not ready to share**.
 
 
 ### One more addition
@@ -402,9 +399,7 @@ index d5b442d..6f8ed8a 100644
 ~~~
 {: .output}
 
-it shows us the difference between
-the last **committed change**
-and what's in the **staging area**.
+it shows us the difference between the last **committed change** and what's in the **staging area**.
 
 Let's **commit** our changes:
 
@@ -469,7 +464,7 @@ Date:   Wed Mar 16 14:19:13 2022 +0000
 ~~~
 {: .output}
 
-![Differences](fig/04-changes/diff.svg){:width="60%"}
+![Differences]({{ site.url }}{{ site.baseurl }}/fig/03-changes/diff.svg){:width="60%"}
 
 To recap, when we want to add changes to our repository,
 we first need to add the changed files to the staging area
