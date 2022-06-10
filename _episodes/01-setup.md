@@ -24,7 +24,7 @@ keypoints:
 
 ## Setting Up Git
 
-**Linux and Mac** users should open a **terminal**, Windows users to should go to the Start Menu open GitBash from the Git group.
+**Linux and Mac** users should open a **terminal**, Windows users to should go to the Start Menu open **Git Bash** from the Git group.
 
 The first time we use Git on a new machine, we need to configure a few things.
 
