@@ -251,11 +251,10 @@ On some older HPC systems, the version of `git` installed doesn't have `git rest
 The fact that files can be reverted one by one
 tends to change the way people organize their work.
 
-If everything is in one large document,
-it's hard (but not impossible) to undo changes to the introduction
-without also undoing changes made later to the conclusion.
+Consider a situation where all your code is in one file, 
+and you fixed a bug in one section but accidentally introduced one elsewhere. 
 
-If the introduction and conclusion are stored in **separate files**,
-on the other hand, moving backward and forward in time becomes much easier.
+You can't just roll back to fix one bug without un-fixing the other. 
+However, if each section is in its own file, you can just roll back the section you broke!
 
 {% include links.md %}

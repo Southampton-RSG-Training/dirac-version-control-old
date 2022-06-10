@@ -67,9 +67,42 @@ Then click **Add key**, and you're sorted - you should be able to send your chan
 
 ## Updating a Remote Repository
 
-* Finally going to send our data to the remote repository we set up earlier
-* `git push`
-* Reload the webpage and see
+Now we've got our credentials set up, let's synchronise our code to the remote repository.
+We do this with `git push`:
+
+~~~
+$ git push
+~~~
+{: .bash}
+
+~~~
+Enumerating objects: 11, done.
+Counting objects: 100% (11/11), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (9/9), done.
+Writing objects: 100% (9/9), 1.11 KiB | 1.11 MiB/s, done.
+Total 9 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), completed with 1 local object.
+To github.com:smangham/climate-analysis.git
+   c526612..e152071  main -> main
+~~~
+{: .output}
+
+And we're done! This bit was easy as when we used `git clone` earlier, it set up our **local repository** to **track** the **remote repository**. The `main -> main` line shows we're sending our local branch called `main` to the remote repository as a branch called `main`.
+
+If we go back to the repository on GitHub, we can refresh the page and see our updates to the code:
+
+![Updated remote repository]({{ site.url }}{{ site.baseurl }}/fig/05-remote/github.png)]
+
+Conveniently, the contents of `README.md` are shown on the main page, with formatting. [You can also add links, tables and more](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax). Your code should always have a descriptive `README.md` file, so anyone visiting the repo can easily get started with it.
+
+> # How often to push?
+> Every day. The big advantage of GitHub is it's an easy way of getting an off-site backup, 
+> which is vital to protect your code from computer failures or more dramatic accidents like
+> wave tank leakages flooding an office or whole buildings burning down due to experiments gone wrong (both things that have happened at the University of Southampton!)
+> ![In case of fire, git commit, git push, leave building](fig/05-remote/incaseoffire.jpg)
+> [Credit: Mitch Altman, CC BY-SA 2.0](https://www.flickr.com/photos/maltman23/38138235276)
+{: .callout}
 
 ## Updating a Local Repository
 
