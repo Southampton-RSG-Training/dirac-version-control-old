@@ -90,31 +90,188 @@ To github.com:smangham/climate-analysis.git
 
 And we're done! This bit was easy as when we used `git clone` earlier, it set up our **local repository** to **track** the **remote repository**. The `main -> main` line shows we're sending our local branch called `main` to the remote repository as a branch called `main`.
 
+> ## What *is* a branch, though?
+> We're not covering them in this material, but they're very useful.
+> Branches allow you to have alternate versions of the code 'branching off' from another branch (e.g. `main`). 
+> You can try out new features in these branches without disrupting your `main` version of the code, then **merge them in** once you've finished.
+{: .callout}
+
 If we go back to the repository on GitHub, we can refresh the page and see our updates to the code:
 
-![Updated remote repository]({{ site.url }}{{ site.baseurl }}/fig/05-remote/github.png)]
+![Updated remote repository]({{ site.url }}{{ site.baseurl }}/fig/05-remote/github.png)
 
 Conveniently, the contents of `README.md` are shown on the main page, with formatting. [You can also add links, tables and more](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax). Your code should always have a descriptive `README.md` file, so anyone visiting the repo can easily get started with it.
 
-> # How often to push?
+> ## How often should I push?
 > Every day. The big advantage of GitHub is it's an easy way of getting an off-site backup, 
 > which is vital to protect your code from computer failures or more dramatic accidents like
-> wave tank leakages flooding an office or whole buildings burning down due to experiments gone wrong (both things that have happened at the University of Southampton!)
+> wave tank leakages flooding an office or whole buildings burning down (both things that have happened at the University of Southampton!)
 > ![In case of fire, git commit, git push, leave building](fig/05-remote/incaseoffire.jpg)
 > [Credit: Mitch Altman, CC BY-SA 2.0](https://www.flickr.com/photos/maltman23/38138235276)
 {: .callout}
 
-## Updating a Local Repository
+## Collaborating on a Remote Repository
 
-* Example of working with collaborators
-* Edit the README.md file on GitHub, commit directly to main
-  * Point out that this isn't common but just an example
-* Edit climate_analysis.py locally
-* `git push`, see an error
-* `git pull` to update
-* `git push`
-* You can use branches to mitigate these issues, each new feature has its own branch
-* Merge conflicts can happen (not in the outline for this course)
+Now we know how to **push** our work from our local repository to a remote one, we need to know the reverse - how to **pull** updates to the code that someone else has made.
+
+We want to invite other people to collaborate on our code, so we'll update the `README.md` with a request for potential collaborators to email us at our University email address.
+
+```
+nano README.md
+cat README.md
+``` {: .bash}
+
+```
+# Climate Analysis Toolkit
+
+This is a set of python scripts designed to analyse climate datafiles.
+
+If you're interested in collaborating, email me at s.w.mangham@soton.ac.uk.
+``` {: .output}
+
+```
+git commit -am "Added collaboration info"
+``` {: .bash}
+
+```
+[main 39a2c8f] Added collaboration info
+ 1 file changed, 2 insertions(+)
+``` {: .output}
+
+In this case, we use `git commit -am` where the `-a` means **commit all modified files we've previously used `git add` on**, and the `-m` bit means 'and here's the commit message' as usual. It's a handy shortcut. 
+
+But **don't push to GitHub** just yet! We're going to set up a small conflict, of the kind you might see when working with a remote repository.
+
+Now, pretending to be an existing collaborator, we'll go and add those installation instructions by editing our `README.md` file directly on GitHub. This isn't *common*, but if you want to quickly make some small changes to a single file it can be useful. We edit it as:
+
+![GitHub edit button]({{ site.url }}{{ site.baseurl }}/fig/05-remote/edit-button.png)
+
+And just expand it a little, making more use of GitHub's markdown formatting:
+
+![GitHub editing Readme]({{ site.url }}{{ site.baseurl }}/fig/05-remote/edit-readme.png)
+
+Then commit the changes directly to our `main` branch with a descriptive commit message:
+
+![GitHub committing edit]({{ site.url }}{{ site.baseurl }}/fig/05-remote/edit-commit.png)
+
+![Updated remote repository]({{ site.url }}{{ site.baseurl }}/fig/05-remote/github-updated.png)
+
+### Push Conflicts
+
+Great. Now let's go back to the terminal and try pushing our local changes to the remote repository. This is going to cause problems, however:
+```
+git push
+``` {: .bash}
+
+```
+To github.com:smangham/climate-analysis.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'git@github.com:smangham/climate-analysis.git'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+``` {: .output}
+
+Git helpfully tells us that actually, there are commits present in the **remote repository** that we don't have in our **local repository**. 
+
+### Merge Conflicts
+
+We'll need to **pull** those commits into our local repository before we can push our own updates back!
+
+```
+git pull
+``` {: .bash}
+
+```
+Auto-merging README.md
+CONFLICT (content): Merge conflict in README.md
+Automatic merge failed; fix conflicts and then commit the result.
+``` {: .output}
+
+We have created a conflict! Both us, and our remote collaborator, both edited `README.md`. Let's take a look at the file:
+
+
+```
+cat README.md
+``` {: .bash}
+```
+# Climate Analysis Toolkit
+
+This is a set of python scripts designed to analyse climate datafiles.
+
+<<<<<<< HEAD
+If you're interested in collaborating, email me at s.w.mangham@soton.ac.uk.
+=======
+To install a copy of the toolkit, open a terminal and run:
+```
+git clone git@github.com:smangham/climate-analysis.git
+```
+
+**This code is currently in development and not all features will work**
+>>>>>>> 493dd81b5d5b34211ccff4b5d0daf8efb3147755
+``` {: .output}
+
+Git has tried to auto-merge the files, but unfortunately failed. It can handle most conflicts by itself, but if two commits edit the *exact same* part of a file it will need you to help it.
+
+We can see the two different edits we made to the end of the `README.md` file, in a block defined by `<<<`, `===` and `>>>`. The top block is labelled `HEAD` (the changes in our latest local commit), whilst the bottom block is labelled with the commit ID of the commit we made on GitHub.
+
+We can easily fix this using `nano`, by deleting all the markers and keeping the text we want:
+
+```
+nano README.md
+cat README.md
+``` {: .bash}
+# Climate Analysis Toolkit
+
+This is a set of python scripts designed to analyse climate datafiles.
+
+If you're interested in collaborating, email me at s.w.mangham@soton.ac.uk.
+
+To install a copy of the toolkit, open a terminal and run:
+```
+git clone git@github.com:smangham/climate-analysis.git
+```
+
+**This code is currently in development and not all features will work**
+```
+
+Now we've got a fixed and finished `README.md` file, we can commit our changes, and push them up to our remote repository:
+
+```
+git commit -am "Fixed merge conflict"
+``` {: .bash}
+
+```
+[main 6f4df16] Fixed merge conflict
+``` {: .output}
+
+```
+git push
+``` {: .bash}
+
+```
+Enumerating objects: 10, done.
+Counting objects: 100% (10/10), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (6/6), 773 bytes | 773.00 KiB/s, done.
+Total 6 (delta 2), reused 0 (delta 0)
+remote: Resolving deltas: 100% (2/2), completed with 1 local object.
+To github.com:smangham/climate-analysis
+   493dd81..6f4df16  main -> main
+``` {: .output}
+
+Now back on GitHub we can see that our `README.md` shows the text from both commits, and our conflict is resolved:
+
+![Resolved conflict on GitHub]({{ site.url }}{{ site.baseurl }}/fig/05-remote/conflict-resolved.png)
+
+> ## Conflict Mitigation
+> If you've got multiple different people working on a code at once,
+> then the **branches** we mentioned earlier can really help reduce conflicts.
+> Each collaborator can work on their own branch, and only merge them back in once everything is finished - dramatically reducing the number of conflicts!
+{: .callout}
 
 ![Remote Repository Commands]({{ site.url }}{{ site.baseurl }}/fig/05-remote/remote.png){:width="60%"}
 
