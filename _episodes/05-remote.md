@@ -159,6 +159,7 @@ Then commit the changes directly to our `main` branch with a descriptive commit 
 ### Push Conflicts
 
 Great. Now let's go back to the terminal and try pushing our local changes to the remote repository. This is going to cause problems, however:
+
 ```
 git push
 ``` {: .bash}
@@ -196,6 +197,7 @@ We have created a conflict! Both us, and our remote collaborator, both edited `R
 ```
 cat README.md
 ``` {: .bash}
+
 ```
 # Climate Analysis Toolkit
 
@@ -223,6 +225,8 @@ We can easily fix this using `nano`, by deleting all the markers and keeping the
 nano README.md
 cat README.md
 ``` {: .bash}
+
+```
 # Climate Analysis Toolkit
 
 This is a set of python scripts designed to analyse climate datafiles.
@@ -235,7 +239,7 @@ git clone git@github.com:smangham/climate-analysis.git
 ```
 
 **This code is currently in development and not all features will work**
-```
+``` {: .output}
 
 Now we've got a fixed and finished `README.md` file, we can commit our changes, and push them up to our remote repository:
 
