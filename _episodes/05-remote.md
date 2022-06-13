@@ -162,7 +162,10 @@ Great. Now let's go back to the terminal and try pushing our local changes to th
 
 ```
 git push
-``` {: .bash}
+``` 
+{: .bash}
+
+
 
 ```
 To github.com:smangham/climate-analysis.git
@@ -173,7 +176,8 @@ hint: not have locally. This is usually caused by another repository pushing
 hint: to the same ref. You may want to first integrate the remote changes
 hint: (e.g., 'git pull ...') before pushing again.
 hint: See the 'Note about fast-forwards' in 'git push --help' for details.
-``` {: .output}
+```
+{: .output}
 
 Git helpfully tells us that actually, there are commits present in the **remote repository** that we don't have in our **local repository**. 
 
@@ -183,20 +187,23 @@ We'll need to **pull** those commits into our local repository before we can pus
 
 ```
 git pull
-``` {: .bash}
+``` 
+{: .bash}
 
 ```
 Auto-merging README.md
 CONFLICT (content): Merge conflict in README.md
 Automatic merge failed; fix conflicts and then commit the result.
-``` {: .output}
+``` 
+{: .output}
 
 We have created a conflict! Both us, and our remote collaborator, both edited `README.md`. Let's take a look at the file:
 
 
 ```
 cat README.md
-``` {: .bash}
+``` 
+{: .bash}
 
 ```
 # Climate Analysis Toolkit
@@ -213,7 +220,8 @@ git clone git@github.com:smangham/climate-analysis.git
 
 **This code is currently in development and not all features will work**
 >>>>>>> 493dd81b5d5b34211ccff4b5d0daf8efb3147755
-``` {: .output}
+``` 
+{: .output}
 
 Git has tried to auto-merge the files, but unfortunately failed. It can handle most conflicts by itself, but if two commits edit the *exact same* part of a file it will need you to help it.
 
@@ -224,7 +232,8 @@ We can easily fix this using `nano`, by deleting all the markers and keeping the
 ```
 nano README.md
 cat README.md
-``` {: .bash}
+``` 
+{: .bash}
 
 ```
 # Climate Analysis Toolkit
@@ -239,21 +248,25 @@ git clone git@github.com:smangham/climate-analysis.git
 ```
 
 **This code is currently in development and not all features will work**
-``` {: .output}
+``` 
+{: .output}
 
 Now we've got a fixed and finished `README.md` file, we can commit our changes, and push them up to our remote repository:
 
 ```
 git commit -am "Fixed merge conflict"
-``` {: .bash}
+``` 
+{: .bash}
 
 ```
 [main 6f4df16] Fixed merge conflict
-``` {: .output}
+``` 
+{: .output}
 
 ```
 git push
-``` {: .bash}
+``` 
+{: .bash}
 
 ```
 Enumerating objects: 10, done.
@@ -265,7 +278,8 @@ Total 6 (delta 2), reused 0 (delta 0)
 remote: Resolving deltas: 100% (2/2), completed with 1 local object.
 To github.com:smangham/climate-analysis
    493dd81..6f4df16  main -> main
-``` {: .output}
+``` 
+{: .output}
 
 Now back on GitHub we can see that our `README.md` shows the text from both commits, and our conflict is resolved:
 
