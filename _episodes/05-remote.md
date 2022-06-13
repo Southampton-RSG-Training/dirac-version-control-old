@@ -214,9 +214,9 @@ This is a set of python scripts designed to analyse climate datafiles.
 If you're interested in collaborating, email me at s.w.mangham@soton.ac.uk.
 =======
 To install a copy of the toolkit, open a terminal and run:
-```
-git clone git@github.com:smangham/climate-analysis.git
-```
+
+    git clone git@github.com:smangham/climate-analysis.git
+
 
 **This code is currently in development and not all features will work**
 >>>>>>> 493dd81b5d5b34211ccff4b5d0daf8efb3147755
@@ -243,9 +243,9 @@ This is a set of python scripts designed to analyse climate datafiles.
 If you're interested in collaborating, email me at s.w.mangham@soton.ac.uk.
 
 To install a copy of the toolkit, open a terminal and run:
-```
-git clone git@github.com:smangham/climate-analysis.git
-```
+
+   git clone git@github.com:smangham/climate-analysis.git
+
 
 **This code is currently in development and not all features will work**
 ``` 
@@ -284,6 +284,8 @@ To github.com:smangham/climate-analysis
 Now back on GitHub we can see that our `README.md` shows the text from both commits, and our conflict is resolved:
 
 ![Resolved conflict on GitHub]({{ site.url }}{{ site.baseurl }}/fig/05-remote/conflict-resolved.png)
+
+Now we can successfully collaboratively develop our research code with others.
 
 > ## Conflict Mitigation
 > If you've got multiple different people working on a code at once,
