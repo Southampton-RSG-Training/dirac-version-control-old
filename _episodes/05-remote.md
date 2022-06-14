@@ -119,7 +119,8 @@ We want to invite other people to collaborate on our code, so we'll update the `
 ```
 nano README.md
 cat README.md
-``` {: .bash}
+``` 
+{: .bash}
 
 ```
 # Climate Analysis Toolkit
@@ -127,16 +128,19 @@ cat README.md
 This is a set of python scripts designed to analyse climate datafiles.
 
 If you're interested in collaborating, email me at s.w.mangham@soton.ac.uk.
-``` {: .output}
+``` 
+{: .output}
 
 ```
 git commit -am "Added collaboration info"
-``` {: .bash}
+``` 
+{: .bash}
 
 ```
 [main 39a2c8f] Added collaboration info
  1 file changed, 2 insertions(+)
-``` {: .output}
+``` 
+{: .output}
 
 In this case, we use `git commit -am` where the `-a` means **commit all modified files we've previously used `git add` on**, and the `-m` bit means 'and here's the commit message' as usual. It's a handy shortcut. 
 
@@ -164,8 +168,6 @@ Great. Now let's go back to the terminal and try pushing our local changes to th
 git push
 ``` 
 {: .bash}
-
-
 
 ```
 To github.com:smangham/climate-analysis.git
