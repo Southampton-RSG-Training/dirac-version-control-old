@@ -17,7 +17,7 @@ keypoints:
 
 # Creating a Repository
 
-A **repository** is a directory that is under **version control** - it can track changes to files within it. Git also makes it easy to sync up a **local repository** on your computer with a **remote repository** on the internet (or intranet!). 
+A **repository** is a directory that is under **version control** - it can track changes to files within it. Git also makes it easy to sync up a **local repository** on your computer (or DIRAC server) with a **remote repository** on the internet. 
 
 ## Using a Template
 
@@ -41,13 +41,118 @@ After a brief wait, GitHub will have created a **remote repository** - a copy of
 
 ![Copy Repository URL]({{ site.url }}{{ site.baseurl }}/fig/02-using-repository/repository-url.png)
 
+Now we'll download a copy of the repository to our server. First, though, just as we needed an SSH key to connect from our computer to the DIRAC server, we need an SSH key to connect from the DIRAC server to GitHub.
+
+> ## SSH vs HTTPS
+> **Make sure you select SSH!** Whilst Git supports both **HTTPS** and **SSH**, **GitHub** will only let you *download* with **HTTPS**, as it's less secure. You can check if you accidentally selected **HTTPS** with 
+> ~~~
+> $ git remote -v
+> ~~~
+> 
+{: .bash}
+
+>
+> ~~~
+> $ origin	git@github.com:yourname/climate-analysis (fetch)
+> $ origin	git@github.com:yourname/climate-analysis (push)
+> ~~~
+> 
+{: .output}
+
+>
+> If you see **HTTPS**, you can fix this with:
+>
+> ~~~
+> $ git remote set-url origin git@github.com:yourname/climate-analysis
+
+{: .warning}
+
+
+## Setting up an SSH Key
+
+We've already set up an SSH key in order to access the DIRAC cluster, but that's on our *local* machine - we also need one on the DIRAC server we've connected to. We can create one on the command line as before - just go with the defaults for every option:
+
 ~~~
-$ git clone git@github.com:smangham/climate-analysis.git
+$ ssh-keygen -t rsa 
+~~~
+{: .bash}
+
+~~~
+Generating public/private rsa key pair.
+Enter file in which to save the key (/cosma/home/ds007/dc-mang1/.ssh/id_rsa): 
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /cosma/home/ds007/dc-mang1/.ssh/id_rsa.
+Your public key has been saved in /cosma/home/ds007/dc-mang1/.ssh/id_rsa.pub.
+The key fingerprint is:
+SHA256:ltRWwH/GJxLDlndQLmtR4LbprhhVjjFbc5ZYoeYiFc8 dc-mang1@login6a.pri.cosma7.alces.network
+The key's randomart image is:
++---[RSA 2048]----+
+|         ..+..o*+|
+|         ...X.=oo|
+|        . o+oEOo+|
+|       . o. =X=X.|
+|        S. .+=*o |
+|       .  ...o   |
+|          .   .  |
+|           o .   |
+|          . ...  |
++----[SHA256]-----+
+~~~
+{: .output}
+
+Now we've generated a key, we can head [back to GitHub](https://github.com) and register the key there. Go to [GitHub > Settings > SSH and GPG keys > Add new](https://github.com/settings/ssh/new), and you should see this:
+
+![Add New SSH Key]({{ site.url }}{{ site.baseurl }}/fig/02-using-repository/ssh.png)
+
+We need to fill in the details. Give the key a title like "DIRAC SSH key", and then paste your **public key** into the key box - we can find it in our `~/.ssh` folder:
+
+~~~
+$ ls ~/.ssh
+~~~
+{: .bash}
+
+~~~
+id_rsa  id_rsa.pub  known_hosts
+~~~
+{: .output}
+
+You want to copy the contents of the `.pub` file, which you can display with:
+
+~~~
+$ cat ~/.ssh/id_rsa.pub
+~~~
+{: .language-bash}
+
+~~~
+ssh-rsa <SNIPPED FOR SECURITY> dc-mang1@login6a.pri.cosma7.alces.network
+~~~
+{: .output}
+
+**Make sure you copy the `.pub` file and not the private key!** Your private key lives on your machine and is never shared with anyone else. Then click **Add key**.
+
+
+## Cloning the Repository
+
+We can finally clone the repository to the HPC server:
+
+~~~
+$ git clone git@github.com:yourname/climate-analysis.git
 ~~~
 {: .language-bash}
 
 ~~~
 Cloning into 'climate-analysis'...
+The authenticity of host 'github.com (140.82.121.4)' can't be established.
+ECDSA key fingerprint is SHA256:p2QAMXNIC1TJYWeIOttrVc98/R1BUFWu3/LiyKgUfQM.
+ECDSA key fingerprint is MD5:7b:99:81:1e:4c:91:a5:0d:5a:2e:2e:80:13:3f:24:ca.
+Are you sure you want to continue connecting (yes/no)? yes
+~~~
+{: .output}
+
+Then, when you're prompted, continue the connection with `yes` and it will finish downloading:
+
+~~~
 remote: Enumerating objects: 4, done.
 remote: Counting objects: 100% (4/4), done.
 remote: Compressing objects: 100% (4/4), done.
@@ -112,10 +217,7 @@ $ git status
 {: .language-bash}
 
 ~~~
-git status
-On branch main
-Your branch is up-to-date with 'origin/main'.
-
+# On branch main
 nothing to commit, working tree clean
 ~~~
 {: .output}

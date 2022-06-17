@@ -45,13 +45,11 @@ $ git status
 {: .language-bash}
 
 ~~~
-On branch main
-Your branch is up-to-date with 'origin/main'.
-
-Untracked files:
-  (use "git add <file>..." to include in what will be committed)
-	README.md
-
+# On branch main
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#	README.md
 nothing added to commit but untracked files present (use "git add" to track)
 ~~~
 {: .output}
@@ -71,12 +69,12 @@ $ git status
 {: .language-bash}
 
 ~~~
-On branch main
-Your branch is up-to-date with 'origin/main'.
-
-Changes to be committed:
-  (use "git restore --staged <file>..." to unstage)
-	new file:   README.md
+# On branch main
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#	new file:   README.md
+#
 ~~~
 {: .output}
 
@@ -126,11 +124,11 @@ $ git status
 {: .language-bash}
 
 ~~~
-On branch main
-Your branch is ahead of 'origin/main' by 1 commit.
-  (use "git push" to publish your local commits)
-
-nothing to commit, working tree clean
+# On branch main
+# Your branch is ahead of 'origin/main' by 1 commit.
+#   (use "git push" to publish your local commits)
+#
+nothing to commit, working directory clean
 ~~~
 {: .output}
 
@@ -210,15 +208,16 @@ $ git status
 {: .language-bash}
 
 ~~~
-On branch main
-Your branch is ahead of 'origin/main' by 1 commit.
-  (use "git push" to publish your local commits)
-
-Changes not staged for commit:
-  (use "git add <file>..." to update what will be committed)
-  (use "git restore <file>..." to discard changes in working directory)
-	modified:   climate_analysis.py
-
+# On branch main
+# Your branch is ahead of 'origin/main' by 1 commit.
+#   (use "git push" to publish your local commits)
+#
+# Changes not staged for commit:
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	modified:   climate_analysis.py
+#
 no changes added to commit (use "git add" and/or "git commit -a")
 ~~~
 {: .output}
@@ -285,15 +284,16 @@ $ git commit -m "Add Docstring"
 {: .language-bash}
 
 ~~~
-On branch main
-Your branch is ahead of 'origin/main' by 1 commit.
-  (use "git push" to publish your local commits)
-
-Changes not staged for commit:
-  (use "git add <file>..." to update what will be committed)
-  (use "git restore <file>..." to discard changes in working directory)
-	modified:   climate_analysis.py
-
+# On branch main
+# Your branch is ahead of 'origin/main' by 1 commit.
+#   (use "git push" to publish your local commits)
+#
+# Changes not staged for commit:
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	modified:   climate_analysis.py
+#
 no changes added to commit (use "git add" and/or "git commit -a")
 ~~~
 {: .output}
@@ -422,11 +422,11 @@ $ git status
 {: .language-bash}
 
 ~~~
-On branch main
-Your branch is ahead of 'origin/main' by 3 commits.
-  (use "git push" to publish your local commits)
-
-nothing to commit, working tree clean
+# On branch main
+# Your branch is ahead of 'origin/main' by 3 commits.
+#   (use "git push" to publish your local commits)
+#
+nothing to commit, working directory clean
 ~~~
 {: .output}
 
