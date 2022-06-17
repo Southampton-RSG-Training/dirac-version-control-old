@@ -113,7 +113,7 @@ When we run `git commit`,
 Git takes everything we have told it to save by using `git add`
 and stores a copy permanently inside the special `.git` directory.
 This permanent copy is called a **[revision](reference.html#revision)**
-and its short **identifier** is `a10bd8f`.
+and its short **identifier** is `fa90884`.
 (Your revision will have different identifier.)
 
 If we run `git status` now:
@@ -121,7 +121,7 @@ If we run `git status` now:
 ~~~
 $ git status
 ~~~
-{: .language-bash}
+{: .bash}
 
 ~~~
 # On branch main
@@ -143,12 +143,14 @@ but **not yet committed**.
 `git add` puts things in this area,
 and `git commit` then copies them to long-term storage (as a commit)
 
-> ## What's The Point of the Staging Area?
+> ## What's the Point of the Staging Area?
 >
 > Why do we have this two-stage process, where we **add** files to the staging area, then create a **commit** from them?
 >
 > Among other reasons, it allows you to easily bundle together a lot of changes in one go. If you changed the name of a variable used in multiple files (e.g. from `t` to `temperature`), you'd need to change it in all your files in one go in order for it to make sense.
 > If you stored a copy of each file one-by-one you'd end up with a lot of versions of the code that didn't work - variables with different names everywhere. The **staging area** lets you bundle together all those small changes that don't work in isolation into one big change that's coherent. 
+>
+> Git does give you shortcuts to reduce **add -> commit** to a single step, but when you're starting out it's always better to make sure you know what's going in to each commit!
 {: .callout}
 
 ### Review the Log
@@ -256,14 +258,6 @@ index 277d6c7..d5b442d 100644
  import signal
 ~~~
 {: .output}
-
-> ## Windows users note
->
-> **No newline at end of file**
-> This message is displayed because otherwise there is no way to tell the difference between a file where there is a newline at the end and one where is not. Diff has to output a newline anyway, or the result would be harder to read or process automatically.
-> This can safely be ignored, but you can avoid seeing it by leaving a blank line at the end of your file.
-{: .callout}
-
 
 The output is **cryptic** because
 it is actually a series of **commands** for tools like editors and `patch`
