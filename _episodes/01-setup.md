@@ -24,16 +24,14 @@ keypoints:
 
 ## Setting Up Git
 
-**Linux and Mac** users should open a **terminal**, Windows users to should go to the Start Menu open **Git Bash** from the Git group.
-
-The first time we use Git on a new machine, we need to configure a few things.
+We're going to use Git on the command line on our remote server, so we need to connect to it first. 
 
 ~~~
-$ cd
+$ ssh username@servername
 ~~~
-{: .language-bash}
+{: .bash}
 
-Now we're going to set some global options, so when Git starts tracking changes to files it records who made them and how to contact them.
+The first time we use Git on a new machine, we need to configure it. We're going to set some global options, so when Git starts tracking changes to files it records who made them and how to contact them.
 
 ~~~
 $ git config --global user.name "Firstname Surname"
@@ -43,16 +41,15 @@ $ git config --global user.email "fsurname@university.ac.uk"
 
 (Please use your own name and the email address you used to sign up to GitHub earlier!)
 
-You can set your favourite text editor, following this table:
+We're going to set **Nano**, a simple, minimal commaand-line text editor to be the default for when you need to edit messages.
+~~~
+$ git config --global core.editor "nano -w"`
+~~~
+{: .language-bash}
 
-| Editor             | Configuration command                            |
-|:-------------------|:-------------------------------------------------|
-| nano               | `$ git config --global core.editor "nano -w"`    |
-| Notepad++ (Win)    | `$ git config --global core.editor "'c:/program files (x86)/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin"`|
+If you're already comfortable with another command-line editor, feel free to select that!
 
-
-Git commands are written `git action`, where `action` is what we actually want it to do.
-In this case, we're telling Git:
+Git commands are written `git action`, where `action` is what we actually want it to do. In this case, we're telling Git:
 
 *   our **name** and **email address**,
 *   what our favorite **text editor** is, and

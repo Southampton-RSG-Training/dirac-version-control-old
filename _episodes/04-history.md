@@ -46,6 +46,8 @@ Date:   Wed Mar 30 17:12:02 2022 +0100
 commit 499b6d18b36a25d3f5ab9be1b708ea48fef1dd65 (origin/main, origin/HEAD)
 Author: Sam Mangham <mangham@gmail.com>
 Date:   Wed Mar 16 14:19:13 2022 +0000
+
+    Initial commit
 ~~~
 {: .output}
 
@@ -174,9 +176,8 @@ This is particularly handy as you can **exactly identify specific versions of th
 
 > ## Other Ways To Reference Commits
 >
-> Git has some more advanced ways of referencing past commits. In place of `HEAD~1` you can use `HEAD~` or `HEAD@{1}`,
+> Newer versionf of Git have some more advanced ways of referencing past commits. In place of `HEAD~1` you can use `HEAD~` or `HEAD@{1}`,
 > or you can even use text to ask more advanced questions, like `git diff HEAD@{"yesterday"}` or `git diff HEAD@{"3 months ago"}`!
->
 {: .callout}
 
 ### Restoring Files
@@ -209,24 +210,25 @@ $ git status
 {: .language-bash}
 
 ~~~
-On branch main
-Your branch is ahead of 'origin/main' by 3 commits.
-  (use "git push" to publish your local commits)
-
-Changes not staged for commit:
-  (use "git add/rm <file>..." to update what will be committed)
-  (use "git restore <file>..." to discard changes in working directory)
-	deleted:    climate_analysis.py
-
+# On branch main
+# Your branch is ahead of 'origin/main' by 3 commits.
+#   (use "git push" to publish your local commits)
+#
+# Changes not staged for commit:
+#   (use "git add/rm <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	deleted:    climate_analysis.py
+#
 no changes added to commit (use "git add" and/or "git commit -a")
 ~~~
 {: .output}
 
 Following the helpful hint in that output, we can put things back the way they were
-by using `git restore`:
+by using `git checkout --`:
 
 ~~~
-$ git restore climate_analysis.py
+$ git checkout -- climate_analysis.py
 $ cat climate_analysis.py
 ~~~
 {: .language-bash}
@@ -236,7 +238,7 @@ $ cat climate_analysis.py
 ~~~
 {: .output}
 
-As you might guess from its name, `git restore` restores an old version of a file. But what if the version in our last commit was wrong or broken, or we accidentally made a commit after deleting the file?
+By default, `checkout --` restores the version of a file in the last commit. But what if the version in our last commit was wrong or broken, or we accidentally made a commit after deleting the file?
 
 We can use `git checkout`, e.g.:
 ~~~
@@ -244,7 +246,10 @@ $ git checkout <HEAD or commit ID> climate_analysis.py
 ~~~
 {: .language-bash}
 
-On some older HPC systems, the version of `git` installed doesn't have `git restore` yet so you'll have to use `git checkout HEAD` instead.
+> ## Modern Git
+> Newer systems have the function `git restore`, which is a shortcut for `git checkout --`. `checkout` has a *lot* of functions, and newer versions of Git simplify things by giving them new names.
+{: .callout}
+
 
 ![Restoring Files]({{ site.url }}{{ site.baseurl }}/fig/04-history/restore.svg){:width="60%"}
 

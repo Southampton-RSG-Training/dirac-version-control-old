@@ -25,50 +25,13 @@ Now, however, we'd like to share the changes we've made to our code with others,
 >
 {: .callout}
 
-## Setting Up GitHub
-
-To do that, we'll use the **remote repository** we set up on GitHub at the start of the workshop. It's another repository, just like the **local repository** on your computer, that Git makes it easy to send and receive data from. Multiple **local repositories** can connect to the same **remote repository**, allowing you to collaborate with colleagues easily.
+To do that, we'll use the **remote repository** we set up on GitHub at the start of the workshop. It's another repository, just like the **local repository** on the DIRAC server, that Git makes it easy to send and receive data from. Multiple **local repositories** can connect to the same **remote repository**, allowing you to collaborate with colleagues easily.
 
 ![Remote Repositories]({{ site.url }}{{ site.baseurl }}/fig/05-remote/remote.svg){:width="60%"}
 
-So we're finally going to address all those *"Your branch is ahead of 'origin/main' by 3 commits"* messages we got from `git status`! However, GitHub doesn't let just anyone push to your repository - you need to prove you're the owner (or have been given access). As constantly re-entering a password is inconvenient and insecure, we'll set up an SSH key to authenticate our identity. 
+So we're finally going to address all those *"Your branch is ahead of 'origin/main' by 3 commits"* messages we got from `git status`! However, GitHub doesn't let just anyone push to your repository - you need to prove you're the owner (or have been given access). Fortunately, we already set up an SSH key earlier. 
 
-We should already have one in order to access  the DIRAC cluster, so we just need to head [back to GitHub](https://github.com) and register the key there. Go to [GitHub > Settings > SSH and GPG keys > Add new](https://github.com/settings/ssh/new), and you should see this:
-
-![Add New SSH Key]({{ site.url }}{{ site.baseurl }}/fig/05-remote/ssh.png)
-
-We need to fill in the details. Give the key a title like "DIRAC SSH key", and then paste your **public key** into the key box - we can find it in our `~/.ssh` folder:
-
-~~~
-$ ls ~/.ssh
-~~~
-{: .language-bash}
-
-~~~
-config id_rsa  id_rsa.pub  known_hosts
-~~~
-{: .output}
-
-You might have more SSH keys, or differently-named ones. You want to copy the contents of the `.pub` file you used for your DIRAC account into the key box, e.g.:
-
-~~~
-$ cat ~/.ssh/id_rsa.pub
-~~~
-{: .language-bash}
-
-~~~
-<SNIPPED FOR SECURITY>
-~~~
-{: .output}
-
-**Make sure you copy the `.pub` file and not the private key!** Your private key lives on your machine and is never shared with anyone else.
-
-Then click **Add key**, and you're sorted - you should be able to send your changes to GitHub, so let's go into how.
-
-## Updating a Remote Repository
-
-Now we've got our credentials set up, let's synchronise our code to the remote repository.
-We do this with `git push`:
+Now we can synchronise our code to the remote repository, with `git push`:
 
 ~~~
 $ git push
@@ -76,19 +39,39 @@ $ git push
 {: .bash}
 
 ~~~
-Enumerating objects: 11, done.
-Counting objects: 100% (11/11), done.
-Delta compression using up to 4 threads
+warning: push.default is unset; its implicit value is changing in
+Git 2.0 from 'matching' to 'simple'. To squelch this message
+and maintain the current behavior after the default changes, use:
+
+  git config --global push.default matching
+
+To squelch this message and adopt the new behavior now, use:
+
+  git config --global push.default simple
+
+See 'git help config' and search for 'push.default' for further information.
+(the 'simple' mode was introduced in Git 1.7.11. Use the similar mode
+'current' instead of 'simple' if you sometimes use older versions of Git)
+
+Counting objects: 11, done.
+Delta compression using up to 32 threads.
 Compressing objects: 100% (9/9), done.
-Writing objects: 100% (9/9), 1.11 KiB | 1.11 MiB/s, done.
-Total 9 (delta 2), reused 0 (delta 0), pack-reused 0
+Writing objects: 100% (9/9), 1.11 KiB | 0 bytes/s, done.
+Total 9 (delta 2), reused 0 (delta 0)
 remote: Resolving deltas: 100% (2/2), completed with 1 local object.
-To github.com:smangham/climate-analysis.git
-   c526612..e152071  main -> main
+To git@github.com:smangham/climate-analysis
+   70bf8f3..501e88f  main -> main
 ~~~
 {: .output}
 
 And we're done! This bit was easy as when we used `git clone` earlier, it set up our **local repository** to **track** the **remote repository**. The `main -> main` line shows we're sending our local branch called `main` to the remote repository as a branch called `main`.
+
+You'll notice that, as this is an old version of Git, we've been given a warning - by default, old Git pushes **all branches** when you do `git push`, whilst newer versions only push **your current branch**. Whilst we don't use branches in this material, let's adopt the modern standard anyway just to remove the notification:
+
+~~~
+$ git config --global push.default simple
+~~~
+{: .bash}
 
 > ## What *is* a branch, though?
 > We're not covering them in this material, but they're very useful.
@@ -104,8 +87,7 @@ Conveniently, the contents of `README.md` are shown on the main page, with forma
 
 > ## How often should I push?
 > Every day. The big advantage of GitHub is it's an easy way of getting an off-site backup, 
-> which is vital to protect your code from computer failures or more dramatic accidents like
-> wave tank leakages flooding an office or whole buildings burning down (both things that have happened at the University of Southampton!)
+> which is vital to protect your code from computer failures or the aforementioned building-destroying disasters!
 > ![In case of fire, git commit, git push, leave building](fig/05-remote/incaseoffire.jpg)
 > [Credit: Mitch Altman, CC BY-SA 2.0](https://www.flickr.com/photos/maltman23/38138235276)
 {: .callout}
@@ -116,30 +98,30 @@ Now we know how to **push** our work from our local repository to a remote one, 
 
 We want to invite other people to collaborate on our code, so we'll update the `README.md` with a request for potential collaborators to email us at our University email address.
 
-```
+~~~
 nano README.md
 cat README.md
-``` 
+~~~ 
 {: .bash}
 
-```
+~~~
 # Climate Analysis Toolkit
 
 This is a set of python scripts designed to analyse climate datafiles.
 
 If you're interested in collaborating, email me at s.w.mangham@soton.ac.uk.
-``` 
+~~~ 
 {: .output}
 
-```
+~~~
 git commit -am "Added collaboration info"
-``` 
+~~~ 
 {: .bash}
 
-```
+~~~
 [main 39a2c8f] Added collaboration info
  1 file changed, 2 insertions(+)
-``` 
+~~~ 
 {: .output}
 
 In this case, we use `git commit -am` where the `-a` means **commit all modified files we've previously used `git add` on**, and the `-m` bit means 'and here's the commit message' as usual. It's a handy shortcut. 
@@ -164,21 +146,21 @@ Then commit the changes directly to our `main` branch with a descriptive commit 
 
 Great. Now let's go back to the terminal and try pushing our local changes to the remote repository. This is going to cause problems, however:
 
-```
+~~~
 git push
-``` 
+~~~ 
 {: .bash}
 
-```
-To github.com:smangham/climate-analysis.git
+~~~
+To git@github.com:smangham/climate-analysis
  ! [rejected]        main -> main (fetch first)
-error: failed to push some refs to 'git@github.com:smangham/climate-analysis.git'
+error: failed to push some refs to 'git@github.com:smangham/climate-analysis'
 hint: Updates were rejected because the remote contains work that you do
 hint: not have locally. This is usually caused by another repository pushing
-hint: to the same ref. You may want to first integrate the remote changes
-hint: (e.g., 'git pull ...') before pushing again.
+hint: to the same ref. You may want to first merge the remote changes (e.g.,
+hint: 'git pull') before pushing again.
 hint: See the 'Note about fast-forwards' in 'git push --help' for details.
-```
+~~~
 {: .output}
 
 Git helpfully tells us that actually, there are commits present in the **remote repository** that we don't have in our **local repository**. 
@@ -187,27 +169,33 @@ Git helpfully tells us that actually, there are commits present in the **remote 
 
 We'll need to **pull** those commits into our local repository before we can push our own updates back!
 
-```
+~~~
 git pull
-``` 
+~~~ 
 {: .bash}
 
-```
+~~~
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+From github.com:smangham/climate-analysis
+   501e88f..023f8f6  main       -> origin/main
 Auto-merging README.md
 CONFLICT (content): Merge conflict in README.md
 Automatic merge failed; fix conflicts and then commit the result.
-``` 
+~~~ 
 {: .output}
 
 We have created a conflict! Both us, and our remote collaborator, both edited `README.md`. Let's take a look at the file:
 
-
-```
+~~~
 cat README.md
-``` 
+~~~ 
 {: .bash}
 
-```
+~~~
 # Climate Analysis Toolkit
 
 This is a set of python scripts designed to analyse climate datafiles.
@@ -222,7 +210,7 @@ To install a copy of the toolkit, open a terminal and run:
 
 **This code is currently in development and not all features will work**
 >>>>>>> 493dd81b5d5b34211ccff4b5d0daf8efb3147755
-``` 
+~~~ 
 {: .output}
 
 Git has tried to auto-merge the files, but unfortunately failed. It can handle most conflicts by itself, but if two commits edit the *exact same* part of a file it will need you to help it.
@@ -231,13 +219,13 @@ We can see the two different edits we made to the end of the `README.md` file, i
 
 We can easily fix this using `nano`, by deleting all the markers and keeping the text we want:
 
-```
+~~~
 nano README.md
 cat README.md
-``` 
+~~~ 
 {: .bash}
 
-```
+~~~
 # Climate Analysis Toolkit
 
 This is a set of python scripts designed to analyse climate datafiles.
@@ -250,37 +238,36 @@ To install a copy of the toolkit, open a terminal and run:
 
 
 **This code is currently in development and not all features will work**
-``` 
+~~~ 
 {: .output}
 
 Now we've got a fixed and finished `README.md` file, we can commit our changes, and push them up to our remote repository:
 
-```
+~~~
 git commit -am "Fixed merge conflict"
-``` 
+~~~ 
 {: .bash}
 
-```
+~~~
 [main 6f4df16] Fixed merge conflict
-``` 
+~~~ 
 {: .output}
 
-```
+~~~
 git push
-``` 
+~~~ 
 {: .bash}
 
-```
-Enumerating objects: 10, done.
-Counting objects: 100% (10/10), done.
-Delta compression using up to 12 threads
+~~~
+Counting objects: 10, done.
+Delta compression using up to 32 threads.
 Compressing objects: 100% (6/6), done.
-Writing objects: 100% (6/6), 773 bytes | 773.00 KiB/s, done.
+Writing objects: 100% (6/6), 774 bytes | 0 bytes/s, done.
 Total 6 (delta 2), reused 0 (delta 0)
 remote: Resolving deltas: 100% (2/2), completed with 1 local object.
-To github.com:smangham/climate-analysis
-   493dd81..6f4df16  main -> main
-``` 
+To git@github.com:smangham/climate-analysis
+   023f8f6..09f5151  main -> main
+~~~ 
 {: .output}
 
 Now back on GitHub we can see that our `README.md` shows the text from both commits, and our conflict is resolved:
