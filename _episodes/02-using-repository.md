@@ -48,16 +48,22 @@ Now we'll download a copy of the repository to our server. First, though, just a
 > **Make sure you select SSH!** Whilst Git supports both **HTTPS** and **SSH**, **GitHub** will only let you *download* with **HTTPS**, as it's less secure. You can check if you accidentally selected **HTTPS** with:
 >
 >{: .bash}
->> git remote -v
+>~~~
+>git remote -v
+>~~~
 >
 >{: .output}
->>$ origin	git@github.com:yourname/climate-analysis (fetch)
->>$ origin	git@github.com:yourname/climate-analysis (push)
+>~~~
+>$ origin	git@github.com:yourname/climate-analysis (fetch)
+>$ origin	git@github.com:yourname/climate-analysis (push)
+>~~~
 >
 > If you see **HTTPS**, you can fix this with:
 >
 >{: .bash} 
->>$ git remote set-url origin git@github.com:yourname/climate-analysis
+>~~~
+>$ git remote set-url origin git@github.com:yourname/climate-analysis
+>~~~
 >
 
 
