@@ -73,7 +73,7 @@ $ git config --global push.default simple
 ~~~
 {: .bash}
 
-> ## What *is* a branch, though?
+> ## What *is* a Branch, Though?
 > We're not covering them in this material, but they're very useful.
 > Branches allow you to have alternate versions of the code 'branching off' from another branch (e.g. `main`). 
 > You can try out new features in these branches without disrupting your `main` version of the code, then **merge them in** once you've finished.
@@ -86,8 +86,7 @@ If we go back to the repository on GitHub, we can refresh the page and see our u
 Conveniently, the contents of `README.md` are shown on the main page, with formatting. [You can also add links, tables and more](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax). Your code should always have a descriptive `README.md` file, so anyone visiting the repo can easily get started with it.
 
 > ## How often should I push?
-> Every day. The big advantage of GitHub is it's an easy way of getting an off-site backup, 
-> which is vital to protect your code from computer failures or the aforementioned building-destroying disasters!
+> Every day. You can never predict when your hard disk will fail or your building will be destroyed!
 > ![In case of fire, git commit, git push, leave building](fig/05-remote/incaseoffire.jpg)
 > [Credit: Mitch Altman, CC BY-SA 2.0](https://www.flickr.com/photos/maltman23/38138235276)
 {: .callout}

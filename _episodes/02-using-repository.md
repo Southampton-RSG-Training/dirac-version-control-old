@@ -44,7 +44,7 @@ After a brief wait, GitHub will have created a **remote repository** - a copy of
 Now we'll download a copy of the repository to our server. First, though, just as we needed an SSH key to connect from our computer to the DIRAC server, we need an SSH key to connect from the DIRAC server to GitHub.
 
 > ## SSH vs HTTPS
-> **Make sure you select SSH!** Whilst Git supports both **HTTPS** and **SSH**, **GitHub** will only let you *download* with **HTTPS**, as it's less secure. You can check if you accidentally selected **HTTPS** with 
+> **Make sure you select SSH!** Whilst Git supports both **HTTPS** and **SSH**, **GitHub** will only let you *download* with **HTTPS**, as it's less secure. You can check if you accidentally selected **HTTPS** with:
 > ~~~
 > $ git remote -v
 > ~~~
@@ -61,11 +61,13 @@ Now we'll download a copy of the repository to our server. First, though, just a
 
 >
 > If you see **HTTPS**, you can fix this with:
->
 > ~~~
 > $ git remote set-url origin git@github.com:yourname/climate-analysis
+> ~~~
+> 
+{: .bash}
 
-{: .warning}
+{: .caution}
 
 
 ## Setting up an SSH Key
