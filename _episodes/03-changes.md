@@ -14,7 +14,7 @@ keypoints:
 - "`git add` puts files in the staging area."
 - "`git commit` saves the staged content as a new commit in the local repository."
 - "Write commit messages that accurately describe your changes."
-- "`git log` lists the commits made to the local repository."
+- "`git log --decorate` lists the commits made to the local repository, along with whether or not they are up-to-date with any remote repository."
 ---
 
 
@@ -159,9 +159,11 @@ If we want to know what we've done recently,
 we can ask Git to show us the **project's history** using `git log`:
 
 ~~~
-$ git log
+$ git log --decorate
 ~~~
 {: .language-bash}
+
+Adding `--decorate` ensures output will indicate, for each commit revision, whether it is up-to-date with its *remote* repository, if one exists (on some systems, you may find Git does not supply this information by default).
 
 ~~~
 commit fa90884ca03dcefb97e415a374ac1aacaaa94c91 (HEAD -> main)
@@ -183,7 +185,7 @@ Date:   Wed Mar 16 14:19:13 2022 +0000
 The listing for each revision includes
 
 * the **revision's full identifier** (which starts with the same characters as the short identifier printed by the `git commit` command earlier),
-* the **branch** it was created on (including whether or not it's up-to-date with any **remote versions of that branch**),
+* the **branch** it was created on (including whether or not it's up-to-date with any **remote versions of that branch** - in this case, our last README commit hasn't been pushed to the remote repo yet),
 * the revision's **author**,
 * **when** it was created,
 * the **log message** Git was given when the revision was committed.
